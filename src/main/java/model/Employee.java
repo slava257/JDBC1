@@ -5,20 +5,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "employee")
 public class Employee {
+    @Id
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "gender")
     private String gender;
+    @Column(name = "age")
     private int age;
-
-    private City city;
+    @Column(name = "city_id")
+    private int city;
 
     public Employee(Integer id, String firstName, String lastName, String gender, int age) {
         this.id = id;
@@ -35,7 +47,7 @@ public class Employee {
         employee.setLastName(resultSet.getString("last_name"));
         employee.setGender(resultSet.getString("gender"));
         employee.setAge(resultSet.getInt("age"));
-        employee.setCity(new City(resultSet.getInt("city_id"), resultSet.getString("city_name")));
+        employee.setCity(resultSet.getInt("city"));
         return employee;
     }
 

@@ -1,9 +1,10 @@
 import dao.EmployeeDAOImpl;
-import model.City;
+
 import model.Employee;
 
 
 import java.sql.*;
+import java.util.List;
 
 
 public class Application {
@@ -49,13 +50,13 @@ public class Application {
 
     public static void main(String[] args) {
         EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
-        System.out.println(employeeDAO.fullFindByEmployee());
-        System.out.println(findById(10));
-        System.out.println(employeeDAO.findById1(10));
-        employeeDAO.addEmployee(new Employee(null, "Anna12", "Oganesyan", "girl", 50, new City(4, null)));
-        employeeDAO.toChange(new Employee(29, "slava", "safronov", "man", 45, new City(5, null)));
-        employeeDAO.deleteById(15);
-        System.out.println(employeeDAO.fullFindByEmployee());
+        findById(10);
+        employeeDAO.findById1(10);
+        employeeDAO.addEmployee(new Employee(3, "Anna12", "Oganesyan", "girl", 50, 4));
+        employeeDAO.toChange(new Employee(2, "slava", "safronov", "man", 3, 5));
+        employeeDAO.deleteById(employeeDAO.findById1(32));
+        List<Employee> list = employeeDAO.fullFindByEmployee();
+        list.forEach(System.out::println);
 
     }
 }
